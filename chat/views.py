@@ -4,8 +4,13 @@ from .models import Room,Message
 def index(request):
     return render(request,'index.html')
 def room(request,room):
-    room = room
-    return render(request,'room.html',{'room':room})
+    user = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
+    return render(request,'room.html',{
+        'room':room,
+        'roomdetails':room_details,
+        'username':user,
+        })
 def checkview(request):
     room = request.POST['room_name']
     user = request.POST['username']
