@@ -8,7 +8,7 @@ def room(request,room):
     room_details = Room.objects.get(name=room)
     return render(request,'room.html',{
         'room':room,
-        'roomdetails':room_details,
+        'room_details':room_details,
         'username':user,
         })
 def checkview(request):
