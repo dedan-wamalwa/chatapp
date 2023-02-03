@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Room,Message
+from django.http import HttpResponse,JsonResponse
 # Create your views here.
 def index(request):
     return render(request,'index.html')
@@ -26,3 +27,10 @@ def send(request):
     username = request.POST['username']
 
     new_message = Message.objects.create(value = message, user = username,room=room_id)
+    new_message.save()
+    return HttpResponse('message sent ')
+def messages(request,room):
+    room_details = Room.objects.get(name = room)
+
+    room_msgs = Message.objects.filter(room=room_details.id)
+    return JsonResponse({"room_msgs":list(room_msgs.values())})

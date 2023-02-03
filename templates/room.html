@@ -63,23 +63,23 @@
 
 		<div id="display"></div>
 
-		<script>
+		 <script>
 			$(document).ready(function () {
 				setInterval(function () {
 					$.ajax({
 						type: "GET",
-						url: "/getMessages/{{room}}/",
+						url: "/messages/{{room}}/",
 						success: function (response) {
-							console.log(response);
+							//console.log(response);
 							$("#display").empty();
-							for (var key in response.messages) {
+							for (var key in response.room_msgs) {
 								var temp =
 									"<div class='container darker'><b>" +
-									response.messages[key].user +
+									response.room_msgs[key].user +
 									"</b><p>" +
-									response.messages[key].value +
+									response.room_msgs[key].value +
 									"</p><span class='time-left'>" +
-									response.messages[key].date +
+									response.room_msgs[key].date +
 									"</span></div>";
 								$("#display").append(temp);
 							}
@@ -90,7 +90,7 @@
 					});
 				}, 1000);
 			});
-		</script>
+		</script> 
 
 		<div class="container">
 			<style>
