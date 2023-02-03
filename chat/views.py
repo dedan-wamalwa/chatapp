@@ -20,3 +20,9 @@ def checkview(request):
     else:
         new_room = Room.objects.create(name = room).save()
         return redirect('/'+room+'/?username='+user)
+def send(request):
+    message = request.POST['message']
+    room_id = request.POST['room_id']
+    username = request.POST['username']
+
+    new_message = Message.objects.create(value = message, user = username,room=room_id)
